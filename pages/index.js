@@ -11,8 +11,8 @@ export default function Home() {
       <div className='w-full h-20 flex'>
         <h1 className='my-auto pl-10 text-3xl font-bold'>Forums</h1>
       </div>
-      <Topic />
-      <Topic />
+      <Topic topicTitle='Current Hockey Fights' forums={['Best Fights', 'Worst Fights']} />
+      <Topic topicTitle='Classic Hockey Fights' forums={['Best Fights', 'Worst Fights']} />
 
     </>
   )
