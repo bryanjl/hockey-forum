@@ -1,10 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
-
 import Topic from '../src/Topics/Topic';
 
-//import styles from '../styles/Home.module.css'
-
+//test data from api
 const topicList = [
   {
     topicTitle: 'Current Hockey Fights',
@@ -23,12 +19,12 @@ export default function Home() {
         <h1 className='my-auto pl-10 text-3xl font-bold'>Forums</h1>
       </div>
       {
-        topicList.map(topic => 
+        topicList.map(topic =>
           <>
             <Topic topicTitle={topic.topicTitle} forums={topic.forums} />
           </>
-          )
-        }
+        )
+      }
     </>
   )
 }
