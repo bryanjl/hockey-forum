@@ -17,8 +17,9 @@ const Topic = ({ topicTitle, forums }) => {
                 </div>
                 {
                 forums.map((forum, i) => 
-                    <>
-                        <ForumList key={i} openList={openList} forumTitle={forum} />        
+                    //should be link to forum
+                    <> 
+                        <ForumList key={i} openList={openList} forumTitle={forum.title}  />        
                     </>
                 )}  
             </div>

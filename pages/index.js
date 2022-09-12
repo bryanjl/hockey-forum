@@ -4,11 +4,49 @@ import Topic from '../src/Topics/Topic';
 const topicList = [
   {
     topicTitle: 'Current Hockey Fights',
-    forums: ['Best Fights', 'Worst Fights']
+    forums:[
+      {
+        title: 'Best Fights',
+        id: '1',
+        threads: [
+          {title: 'thread1', id: '1'}, 
+          {title: 'thread2', id: '2'}, 
+          {title: 'thread3', id: '3'}
+        ] //ids to go to thread
+      },
+      {
+        title: 'Worst Fights',
+        id: '2',
+        threads: [
+          {title: 'thread1', id: '1'}, 
+          {title: 'thread2', id: '2'}, 
+          {title: 'thread3', id: '3'}
+        ]
+      }
+    ]
   },
   {
     topicTitle: 'Classic Hockey Fights',
-    forums: ['Best Fights', 'Worst Fights']
+    forums:[
+      {
+        title: 'Best Fights',
+        id: '1',
+        threads: [
+          {title: 'thread1', id: '1'}, 
+          {title: 'thread2', id: '2'}, 
+          {title: 'thread3', id: '3'}
+        ] //ids to go to thread
+      },
+      {
+        title: 'Worst Fights',
+        id: '2',
+        threads: [
+          {title: 'thread1', id: '1'}, 
+          {title: 'thread2', id: '2'}, 
+          {title: 'thread3', id: '3'}
+        ]
+      }
+    ]
   }
 ];
 
