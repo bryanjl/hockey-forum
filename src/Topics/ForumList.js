@@ -6,7 +6,7 @@ const ForumList = ({ forumTitle, openList }) => {
 
     return (
         <div className={`${openList ? 'block' : 'hidden'}`}>
-            <div className='w-full h-20 border border-black p-2 pl-4'>
+            <div className='w-full h-20 border-t-2 p-2 pl-4 bg-slate-50 hover:bg-slate-200 cursor-pointer'>
                 <h1 className='font-medium'>{forumTitle}</h1>
                 <div className='m-2 flex'>
                     <div className='my-auto flex'>
