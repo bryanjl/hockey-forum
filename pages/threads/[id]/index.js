@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Post from '../../../src/Posts/Post'
 import {MdOutlineAccountCircle, MdAccessTime} from 'react-icons/md'
 import HTMLEditor from '../../../src/Editor/HTMLEditor'
 
+
+
 const Thread = (props) => {
-  let date = props.data.data.attributes.createdAt
-  date = date.split('T')[0]
+  let date = props.data.data.attributes.createdAt;
+  date = date.split('T')[0];
+
+  //This could just be a constant -> no need to set data after initial render
+  const [data, setData] = useState(props.data.data.attributes);
+  const [posts, setPosts] = useState(props.data.data.attributes.posts.data);
+  
+  //function for reply button on post
+  const [replyValue, setReplyValue] = useState('')
+  
+  const handleReply = (reply) => {
+    setReplyValue(reply)
+  }
+
   return (
     <>
       <div className='m-5'>
-        <h1 className='mb-3 text-3xl font-bold'>{props.data.data.attributes.title}</h1>
+        <h1 className='mb-3 text-3xl font-bold'>{data.title}</h1>
         <div className='flex justify-around'>
           <div className='flex'>
             <MdOutlineAccountCircle size={25} />
@@ -19,18 +33,17 @@ const Thread = (props) => {
             <MdAccessTime size={25} />
             <p className='italic font-light pl-2'>{date}</p>
           </div>
-        </div>   
+        </div>
       </div>
       {
-        props.data.data.attributes.posts.data.map(post => 
+        posts.map(post =>
           <>
-            <Post data={post} />
-          </>  
+            <Post key={post.id} data={post} handleReply={handleReply} />
+          </>
         )
       }
 
-
-      {/* <HTMLEditor /> */}
+      <HTMLEditor posts={posts} setPosts={setPosts} replyValue={replyValue} />
     </>
   )
 }
