@@ -2,7 +2,7 @@ import React from 'react'
 
 import { MdPostAdd } from 'react-icons/md'
 
-const ForumCard = ({forumTitle}) => {
+const ThreadCard = ({forumTitle}) => {
     return (
         <>
             <div className="w-full h-36 border border-black mt-2 rounded-sm grid grid-cols-4 cursor-pointer shadow-lg">
@@ -32,4 +32,4 @@ const ForumCard = ({forumTitle}) => {
 
 
 
-export default ForumCard
+export default ThreadCard

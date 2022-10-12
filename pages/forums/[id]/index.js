@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link';
-import ForumCard from '../../../src/Forum/ForumCard'
+import ThreadCard from '../../../src/Thread/ThreadCard'
+import CreateThread from '../../../src/Thread/CreateThread';
 
 
 const Forum = (props) => {
+
+  const [threads, setThreads] = useState(props.data.data.attributes.threads.data);
+
   return (
     <>
       <div className="p-2">
@@ -14,18 +18,19 @@ const Forum = (props) => {
       {/* THREAD WRAPPER */}
       <div className="w-full h-full px-5">
         {
-          props.data.data.attributes.threads.data.map(thread => 
-            // THIS SHOULD BE A COMPONENT
+          threads.map(thread =>
             <>
               <Link href={`/threads/${thread.id}`}>
                 <a>
-                  <ForumCard id={thread.id} forumTitle={thread.attributes.title} />
+                  <ThreadCard id={thread.id} forumTitle={thread.attributes.title} />
                 </a>
               </Link>
             </>
           )
         }
       </div>
+      {/* BUTTON TO OPEN?? */}
+      <CreateThread threads={threads} setThreads={setThreads} />
     </>
   )
 }

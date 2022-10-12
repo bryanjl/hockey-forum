@@ -35,6 +35,7 @@ export default function HTMLEditor({ posts, setPosts, replyValue }) {
         newData.push(newPost);
         setPosts(newData);
 
+        //thread id needs to be dynamic!!
         newPost = {
             data: {
                 title: '',
