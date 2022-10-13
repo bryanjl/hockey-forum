@@ -22,7 +22,7 @@ const Forum = (props) => {
             <>
               <Link href={`/threads/${thread.id}`}>
                 <a>
-                  <ThreadCard id={thread.id} forumTitle={thread.attributes.title} />
+                  <ThreadCard id={thread.id} threadTitle={thread.attributes.title} threadDescription={thread.attributes.description} />
                 </a>
               </Link>
             </>

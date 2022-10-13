@@ -53,7 +53,10 @@ const CreateThread = ({threads, setThreads}) => {
                 <form className='bg-white rounded px-8 pt-6 pb-8 mb-4'>
                     {/* TITLE INPUT */}
                     <div>
-                        <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='threadTitle'>
+                        <label 
+                            className='block text-gray-700 text-sm font-bold mb-2' 
+                            htmlFor='threadTitle'
+                        >
                             Title:
                         </label>
                         <input 
@@ -67,7 +70,9 @@ const CreateThread = ({threads, setThreads}) => {
                     </div>
                     {/* DESCRIPTION INPUT */}
                     <div className='mt-2'>
-                        <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='threadDescription'>
+                        <label 
+                            className='block text-gray-700 text-sm font-bold mb-2' 
+                            htmlFor='threadDescription'>
                             Description:
                         </label>
                         <textarea 
