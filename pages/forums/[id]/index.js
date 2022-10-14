@@ -22,7 +22,13 @@ const Forum = (props) => {
             <>
               <Link href={`/threads/${thread.id}`}>
                 <a>
-                  <ThreadCard id={thread.id} threadTitle={thread.attributes.title} threadDescription={thread.attributes.description} />
+                  <ThreadCard 
+                    id={thread.id} 
+                    threadTitle={thread.attributes.title} 
+                    threadDescription={thread.attributes.description} 
+                    postCount={thread.attributes.posts.data.length} 
+                    creator={thread.attributes.creator} 
+                  />
                 </a>
               </Link>
             </>
@@ -36,7 +42,7 @@ const Forum = (props) => {
 }
 
 export async function getServerSideProps(context){
-  const res = await fetch(`http://localhost:1337/api/forums/${context.params.id}?populate=*`)
+  const res = await fetch(`http://localhost:1337/api/forums/${context.params.id}?populate=threads&populate=threads.posts`)
   const data = await res.json();
   //console.log(data.data.attributes.threads.data[0].title)
   // CAN REDUCE SIZE OF OBJECT

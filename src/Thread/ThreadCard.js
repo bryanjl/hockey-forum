@@ -2,7 +2,7 @@ import React from 'react'
 
 import { MdPostAdd } from 'react-icons/md'
 
-const ThreadCard = ({threadTitle, threadDescription}) => {
+const ThreadCard = ({threadTitle, threadDescription, postCount, creator}) => {
     return (
         <>
             <div className="w-full min-h-36 border border-black mt-2 rounded-sm grid grid-cols-4 cursor-pointer shadow-lg">
@@ -19,12 +19,12 @@ const ThreadCard = ({threadTitle, threadDescription}) => {
                     <div className='border border-t-2 px-2 py-2 flex justify-between'>
                         {/* NAME OF CREATOR */}
                         <div className=''>
-                            <p>pilgrimBry</p>
+                            <p>{creator}</p>
                         </div>
                         {/* NUMBER OF RESPONSES */}
                         <div className='flex'>
                             <MdPostAdd className='' size={25} />
-                            <p>25</p>
+                            <p>{postCount}</p>
                         </div>
                     </div>
                 </div>

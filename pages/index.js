@@ -1,57 +1,32 @@
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../src/context/UserContext';
 import Topic from '../src/Topics/Topic';
 
-//test data from api
-// const topicList = [
-//   {
-//     topicTitle: 'Current Hockey Fights',
-//     forums:[
-//       {
-//         title: 'Best Fights',
-//         id: '1',
-//         threads: [
-//           {title: 'thread1', id: '1'}, 
-//           {title: 'thread2', id: '2'}, 
-//           {title: 'thread3', id: '3'}
-//         ] //ids to go to thread
-//       },
-//       {
-//         title: 'Worst Fights',
-//         id: '2',
-//         threads: [
-//           {title: 'thread1', id: '1'}, 
-//           {title: 'thread2', id: '2'}, 
-//           {title: 'thread3', id: '3'}
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     topicTitle: 'Classic Hockey Fights',
-//     forums:[
-//       {
-//         title: 'Best Fights',
-//         id: '1',
-//         threads: [
-//           {title: 'thread1', id: '1'}, 
-//           {title: 'thread2', id: '2'}, 
-//           {title: 'thread3', id: '3'}
-//         ] //ids to go to thread
-//       },
-//       {
-//         title: 'Worst Fights',
-//         id: '2',
-//         threads: [
-//           {title: 'thread1', id: '1'}, 
-//           {title: 'thread2', id: '2'}, 
-//           {title: 'thread3', id: '3'}
-//         ]
-//       }
-//     ]
-//   }
-// ];
-
 export default function Home(props) {
-  //console.log("hello", props)
+  const {user, setUser} = useContext(UserContext)
+  useEffect(() => {
+    if (!user) {
+      //ERROR HERE NEED TO GET USER USING TOKEN
+      let token = localStorage.getItem('token');
+      if (token) {
+        fetch('https://hockey-chronicles-api.herokuapp.com/api/v1/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(credentials)
+        }).then((response) => {
+          //need to do response check here!
+          //success/failure check
+          return response.json()
+        }).then(data => {
+          localStorage.setItem('token', data.token);
+          console.log(data);
+        });
+      }
+    }
+  }, [])
+
   return (
     <>
       <div className='w-full h-20 flex'>
