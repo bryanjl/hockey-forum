@@ -1,18 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { UserContext } from '../src/context/UserContext'
 import Layout from '../src/Layout/Layout'
 import '../styles/globals.css'
 
 
 function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    let storedUser = localStorage.getItem('username');
+    // console.log(storedUser)
+    setUser(storedUser)
+    
+  }, []);
 
   return (
-    <Layout>
-      <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{ user, setUser }}>
+      <Layout>
+
         <Component {...pageProps} />
-      </UserContext.Provider>
-    </Layout>
+
+      </Layout>
+    </UserContext.Provider>
   )
 }
 

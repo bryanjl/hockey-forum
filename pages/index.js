@@ -1,31 +1,6 @@
-import { useContext, useEffect } from 'react';
-import { UserContext } from '../src/context/UserContext';
 import Topic from '../src/Topics/Topic';
 
 export default function Home(props) {
-  const {user, setUser} = useContext(UserContext)
-  useEffect(() => {
-    if (!user) {
-      //ERROR HERE NEED TO GET USER USING TOKEN
-      let token = localStorage.getItem('token');
-      if (token) {
-        fetch('https://hockey-chronicles-api.herokuapp.com/api/v1/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(credentials)
-        }).then((response) => {
-          //need to do response check here!
-          //success/failure check
-          return response.json()
-        }).then(data => {
-          localStorage.setItem('token', data.token);
-          console.log(data);
-        });
-      }
-    }
-  }, [])
 
   return (
     <>
@@ -35,9 +10,9 @@ export default function Home(props) {
       <div className={`lg:grid lg:grid-cols-4`}>
         <div className='lg:col-span-3'>
           {
-            props.data.data.map(topic =>
+            props.data.data.map((topic) =>
               <>
-                <Topic topicTitle={topic.attributes.title} forums={topic.attributes.forums.data} />
+                <Topic key={topic.id} topicTitle={topic.attributes.title} forums={topic.attributes.forums.data} />
               </>
             )
           }

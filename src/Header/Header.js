@@ -12,7 +12,7 @@ const Header = () => {
                 <div className='flex'>
                     <MdMenu onClick={() => setOpenNav(!openNav)} color='white' size={50} className='m-auto' />
                 </div>
-                <Nav openNav={openNav} />
+                <Nav openNav={openNav} setOpenNva={setOpenNav}/>
                 <Logo />
             </div>
         </header>

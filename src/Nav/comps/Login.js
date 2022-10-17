@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../../context/UserContext';
 
 const Login = () => {
+    const {user, setUser} = useContext(UserContext)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -17,11 +19,16 @@ const Login = () => {
             },
             body: JSON.stringify(credentials)
         }).then((response) => {
-            //need to do response check here!
-            //success/failure check
-            return response.json()
+            return response.json();
         }).then(data => {
-            localStorage.setItem('token', data.token)
+            if(data.success){
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', data.user.username)
+                setUser(data.user.username);
+                // console.log(data.user)
+            } else {
+                setUser(null);
+            }
         });
     }
 
