@@ -2,6 +2,8 @@ import React from 'react'
 
 const Post = ({data, handleReply}) => {
 
+    console.log(data)
+
     const handleClick = () => {
         //let reply = data.attributes.body
         //setReplyValue(reply)

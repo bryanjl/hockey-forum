@@ -10,11 +10,6 @@ const Nav = ({ openNav, setOpenNav }) => {
   const {user, setUser} = useContext(UserContext);
   const [openLogin, setOpenLogin] = useState(false);
   const [openRegister, setOpenRegister] = useState(false);
-
-
-  //setUser(null) 
-
-  // console.log(user);
   
   const handleClick = () => {
     setOpenLogin(!openLogin);

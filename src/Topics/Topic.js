@@ -18,11 +18,10 @@ const Topic = ({ topicTitle, forums }) => {
                 </div>
                 {
                 forums.map((forum) => 
-                    //should be link to forum
                     <> 
                         <Link href={`/forums/${forum.id}`}>
                             <a>
-                                <ForumList key={forum.id} openList={openList} forumTitle={forum.attributes.title}  />        
+                                <ForumList key={forum.id} openList={openList} forumTitle={forum.attributes.title} threadCount={forum.attributes.threads.data.length}  />        
                             </a>
                         </Link>
                     </>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdOutlineList, MdPostAdd } from 'react-icons/md'
 
-const ForumList = ({ forumTitle, openList }) => {
+const ForumList = ({ forumTitle, openList, threadCount }) => {
 
 
     return (
@@ -11,12 +11,12 @@ const ForumList = ({ forumTitle, openList }) => {
                 <div className='m-2 flex'>
                     <div className='my-auto flex'>
                         <MdOutlineList className='' size={25} />
-                        <p className='pl-1 font-light'>25</p>
+                        <p className='pl-1 font-light'>{threadCount}</p>
                     </div>
-                    <div className='flex ml-2'>
+                    {/* <div className='flex ml-2'>
                         <MdPostAdd className='' size={25} />
                         <p className='pl-1 font-light'>25</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

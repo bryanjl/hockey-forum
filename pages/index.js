@@ -30,7 +30,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context){
-  const res = await fetch('http://localhost:1337/api/topics?populate=*');
+  const res = await fetch('http://localhost:1337/api/topics?populate=forums&populate=forums.threads');
   const data = await res.json();
 
   //console.log(data);
