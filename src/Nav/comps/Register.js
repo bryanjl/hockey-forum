@@ -1,18 +1,21 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../../context/UserContext';
 
-const Login = ({setOpenLogin, setOpenRegister}) => {
-    const {user, setUser} = useContext(UserContext)
+const Register = ({setOpenLogin, setOpenRegister}) => {
+
+    const { user, setUser } = useContext(UserContext)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
 
-    const handleLogin = async() => {
+    const handleRegister = async () => {
         let credentials = {
             username,
-            password
+            password,
+            email
         }
 
-        fetch('https://hockey-chronicles-api.herokuapp.com/api/v1/auth/login', {
+        fetch('https://hockey-chronicles-api.herokuapp.com/api/v1/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +24,7 @@ const Login = ({setOpenLogin, setOpenRegister}) => {
         }).then((response) => {
             return response.json();
         }).then(data => {
-            if(data.success){
+            if (data.success) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('username', data.user.username)
                 setUser(data.user.username);
@@ -33,7 +36,6 @@ const Login = ({setOpenLogin, setOpenRegister}) => {
             }
         });
     }
-
     return (
         <>
             <div className='mt-2'>
@@ -49,7 +51,7 @@ const Login = ({setOpenLogin, setOpenRegister}) => {
                             className='shadow apperance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                             id='username'
                             type='text'
-                            placeholder='Enter your username...'
+                            placeholder='Choose a username...'
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
@@ -65,24 +67,42 @@ const Login = ({setOpenLogin, setOpenRegister}) => {
                             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                             id='password'
                             type='password'
-                            placeholder='Enter your password...'
+                            placeholder='Choose a password...'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className='px-2'>
+                        <label
+                            className='block text-gray-700 text-sm font-bold mb-2'
+                            htmlFor='email'
+                        >
+                            E-Mail:
+                        </label>
+                        <input
+                            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            id='email'
+                            type='text'
+                            placeholder='Enter E-Mail'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                 </form>
                 <div className='w-full flex mt-2'>
                     <button
                         className='border border-black p-1 w-20 rounded m-auto'
-                        onClick={handleLogin}
+                        onClick={handleRegister}
                     >
-                        Login
+                        Register
                     </button>
                 </div>
 
             </div>
         </>
     )
+
+
 }
 
-export default Login
+export default Register
