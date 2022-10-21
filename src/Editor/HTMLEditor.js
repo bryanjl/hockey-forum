@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import 'react-quill/dist/quill.snow.css'
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'),{
@@ -7,12 +8,8 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'),{
     loading: () => <p>Loading...</p>,
 });
 
-export default function HTMLEditor({ posts, setPosts, replyValue }) {
-
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //need to add user data to POST request for storing the post
-        //Need to get the TOKEN from user cookies
-    //Do we need a title for a post?
+export default function HTMLEditor({ posts, setPosts, replyValue, threadID }) {
+    const {user} = useContext(UserContext);
 
     const [value, setValue] = useState(replyValue);
 
@@ -21,13 +18,17 @@ export default function HTMLEditor({ posts, setPosts, replyValue }) {
     }, [replyValue])
 
     const handlePost = () => {
-        //console.log('here')
+        //!!!!!Check for blank value!!!!!!!
+        let date = new Date(Date.now());
+        date = date.toISOString()
+        
         let newPost = {
             id: posts.length + 1,
             attributes: {
                 title: '',
                 body: value,
-                createdAt: Date.now()
+                createdAt: date,
+                creator: user
             }
         };
         
@@ -40,7 +41,8 @@ export default function HTMLEditor({ posts, setPosts, replyValue }) {
             data: {
                 title: '',
                 body: value,
-                thread: 2
+                thread: threadID,
+                creator: user
             }
         };
 

@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../context/UserContext';
 
-const CreateThread = ({threads, setThreads}) => {
+const CreateThread = ({threads, setThreads, forumID}) => {
+    const {user} = useContext(UserContext)
+
     const [titleValue, setTitleValue]= useState('');
     const [descriptionValue, setDescriptionValue] = useState('');
 
@@ -10,7 +13,8 @@ const CreateThread = ({threads, setThreads}) => {
             data: {
                 title: titleValue,
                 description: descriptionValue,
-                forum: 2
+                forum: forumID,
+                creator: user
             }
         }
 
@@ -20,7 +24,11 @@ const CreateThread = ({threads, setThreads}) => {
             id: threads.length + 1,
             attributes: {
                 title: titleValue,
-                description: descriptionValue
+                description: descriptionValue,
+                creator: user,
+                posts: {
+                    data: []
+                }
             }
         });
 

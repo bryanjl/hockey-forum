@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Post = ({data, handleReply}) => {
-
-    console.log(data)
-
+const Post = ({data, handleReply}) => {    
+    let date = data.attributes.createdAt.split('T')[0];
+    
     const handleClick = () => {
         //let reply = data.attributes.body
         //setReplyValue(reply)
@@ -23,19 +22,19 @@ const Post = ({data, handleReply}) => {
         </div>
         <div className='row-span-1 border-t-2 grid grid-cols-4'>
             <div className='col-span-1 border-r-2'>
-                image
+                {/* image */}
             </div>
-            <div className='col-span-3'>
-                user info
-                / date
+            <div className='col-span-3 grid grid-rows-2'>
+                <div className='row-span-1 ml-2 italic'>{data.attributes.creator}</div>
+                <div className='row-span-1 ml-2'>{date}</div>
             </div>
         </div>
         {/* ACTION BUTTONS */}
         <div className='row-span-1 flex justify-end border-t-2'>
-            <div className='my-auto mr-2'>
+            {/* <div className='my-auto mr-2'>
                 <button type='button' className='border px-2 bg-red-50 rounded-lg'>Quote</button>
-            </div>
-            <div className='my-auto mr-2'>
+            </div> */}
+            <div className='mr-2 my-2'>
                 <button type='button' onClick={handleClick} className='border px-2 bg-red-50 rounded-lg'>Reply</button>
             </div>
         </div>

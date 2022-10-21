@@ -5,9 +5,9 @@ import CreateThread from '../../../src/Thread/CreateThread';
 
 
 const Forum = (props) => {
-
+  
   const [threads, setThreads] = useState(props.data.data.attributes.threads.data);
-
+  
   return (
     <>
       <div className="p-2">
@@ -36,7 +36,7 @@ const Forum = (props) => {
         }
       </div>
       {/* BUTTON TO OPEN?? */}
-      <CreateThread threads={threads} setThreads={setThreads} />
+      <CreateThread threads={threads} setThreads={setThreads} forumID={props.data.data.id} />
     </>
   )
 }

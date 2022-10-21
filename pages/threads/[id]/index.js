@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react'
-import { UserContext } from '../../../src/context/UserContext'
+import React, { useState } from 'react'
 import Post from '../../../src/Posts/Post'
 import {MdOutlineAccountCircle, MdAccessTime} from 'react-icons/md'
 import HTMLEditor from '../../../src/Editor/HTMLEditor'
@@ -7,7 +6,7 @@ import HTMLEditor from '../../../src/Editor/HTMLEditor'
 
 
 const Thread = (props) => {
-  const {user} = useContext(UserContext)
+  // console.log(props.data.data.id)
 
   let date = props.data.data.attributes.createdAt;
   date = date.split('T')[0];
@@ -17,48 +16,7 @@ const Thread = (props) => {
   const [posts, setPosts] = useState(props.data.data.attributes.posts.data);
   
   //function for reply button on post
-  const [replyValue, setReplyValue] = useState('')
-
-  const handleReply = (reply) => {
-    setReplyValue(reply);
-
-    //upload to db
-    //create data body
-    let newPost = {
-      data: {
-        title: titleValue,
-        description: descriptionValue,
-        forum: 2
-      }
-    }
-
-    //NEED TO ADD USER INFO and DATE
-    let newThreads = [...threads];
-    newThreads.push({
-      id: threads.length + 1,
-      attributes: {
-        title: titleValue,
-        description: descriptionValue
-      }
-    });
-
-    setThreads(newThreads);
-
-    fetch(`http://localhost:1337/api/threads/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
-      },
-      body: JSON.stringify(newThread)
-    }).then((res) => {
-      // console.log(res)
-    });
-
-    //clear the value
-    setTitleValue('');
-    setDescriptionValue('');
-  }
+  const [replyValue, setReplyValue] = useState('');
 
   return (
     <>
@@ -78,12 +36,12 @@ const Thread = (props) => {
       {
         posts.map(post =>
           <>
-            <Post key={post.id} data={post} handleReply={handleReply} />
+            <Post key={post.id} data={post} />
           </>
         )
       }
 
-      <HTMLEditor posts={posts} setPosts={setPosts} replyValue={replyValue} />
+      <HTMLEditor posts={posts} setPosts={setPosts} replyValue={replyValue} threadID={props.data.data.id} />
     </>
   )
 }
