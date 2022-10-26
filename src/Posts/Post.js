@@ -1,12 +1,13 @@
 import React from 'react'
 
-const Post = ({data, handleReply}) => {    
+const Post = ({data, setReplyValue}) => {    
     let date = data.attributes.createdAt.split('T')[0];
     
     const handleClick = () => {
         //let reply = data.attributes.body
         //setReplyValue(reply)
-        handleReply(data.attributes.body)
+        let replyValue = `<p className='italic'>${data.attributes.body}</p>`
+        setReplyValue(replyValue)
     }
 
   return (

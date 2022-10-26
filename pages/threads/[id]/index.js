@@ -36,7 +36,7 @@ const Thread = (props) => {
       {
         posts.map(post =>
           <>
-            <Post key={post.id} data={post} />
+            <Post key={post.id} data={post} setReplyValue={setReplyValue} />
           </>
         )
       }

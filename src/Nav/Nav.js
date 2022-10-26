@@ -32,7 +32,10 @@ const Nav = ({ openNav, setOpenNav }) => {
   //html editor text appears over nav bar
 
   return (
-    <div className={`w-3/4 h-screen border border-r-black absolute top-28 z-100 bg-blue-50 ${openNav ? `left-0` : `-left-full`} transition-all ease-in-out duration-700`} >
+    <div className={`w-3/4 h-screen border border-r-black absolute top-28 z-10 bg-blue-50 
+                    ${openNav ? `left-0` : `-left-full`} transition-all ease-in-out duration-700
+                    lg:w-1/4
+                    `} >
 
       <Link href='/'>
         <a onClick={handleOpenNav}>
