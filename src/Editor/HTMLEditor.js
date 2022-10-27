@@ -14,7 +14,7 @@ export default function HTMLEditor({ posts, setPosts, replyValue, threadID }) {
     const [value, setValue] = useState(replyValue);
 
     useEffect(() => {
-        setValue(replyValue)
+        setValue(`<h2><span style="background-color: powderblue"><em>${replyValue}</em></span></h2>`)
     }, [replyValue])
 
     const handlePost = () => {
@@ -60,13 +60,29 @@ export default function HTMLEditor({ posts, setPosts, replyValue, threadID }) {
         setValue('');
     }
 
+    let formats = [
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "blockquote",
+        "list",
+        "bullet",
+        "indent",
+        "link",
+        "image"
+      ];
+
     return (
         <>
             <QuillNoSSRWrapper
                 className=' border border-black mx-2'
                 theme='snow'
+                // formats={formats}
                 value={value}
                 onChange={setValue}
+            
             />
             <button
                 type='button'

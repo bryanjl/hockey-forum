@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <div className='lg:grid lg:grid-cols-4'>
+      <div className='lg:grid lg:grid-cols-8'>
         
         {/* LEFT BAR - NAV */}
         <div className='lg:col-span-1 lg:border-r-2'>
@@ -18,12 +18,12 @@ const Layout = ({ children }) => {
         </div>
 
         {/* MAIN */}
-        <div className='lg:col-span-2'>
+        <div className='lg:col-span-5 min-h-screen'>
           <main>{children}</main>
         </div>
 
         {/* //side bar */}
-        <div className='lg:col-span-1'>
+        <div className='lg:col-span-2'>
           <div className='lg:border-l-2 lg:p-10 h-full'>
             {/* links to sponsors/etc */}
             

@@ -6,7 +6,9 @@ const Post = ({data, setReplyValue}) => {
     const handleClick = () => {
         //let reply = data.attributes.body
         //setReplyValue(reply)
-        let replyValue = `<p className='italic'>${data.attributes.body}</p>`
+
+
+        let replyValue = `${data.attributes.creator} says: ${data.attributes.body}`
         setReplyValue(replyValue)
     }
 
