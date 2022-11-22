@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Topic from '../src/Topics/Topic';
 
 export default function Home(props) {
-
+  console.log(props)
   return (
     <>
 
@@ -15,7 +15,7 @@ export default function Home(props) {
           {
             props.data.data.map((topic) =>
               <>
-                <Topic key={topic.id} topicTitle={topic.attributes.title} forums={topic.attributes.forums.data} />
+                <Topic key={topic._id} topicTitle={topic.title} topicID={topic._id} />
               </>
             )
           }
@@ -27,7 +27,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context){
-  const res = await fetch('http://localhost:1337/api/topics?populate=forums&populate=forums.threads');
+  const res = await fetch('http://localhost:5000/api/v1/forum/topics');
   const data = await res.json();
 
   //console.log(data);

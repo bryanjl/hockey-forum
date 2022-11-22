@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Link from 'next/link';
 import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md'
 import ForumList from './ForumList';
 
-const Topic = ({ topicTitle, forums }) => {
+const Topic = ({ topicTitle, topicID }) => {
     const [openList, setOpenList] = useState(false);
+    const [isFetching, setIsFetching] = useState(true);
+    const [forums, setForums] = useState([]);
+
+    useEffect(() => {
+        setIsFetching(true)
+        fetch(`http://localhost:5000/api/v1/forum/forums?topic=${topicID}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if(data.success === false){
+                    setForums([]);
+                }else {
+                    setForums(data.data);
+                }
+                setIsFetching(false)                
+            })
+    }, [topicID]);
 
     return (
         <>
@@ -16,12 +32,12 @@ const Topic = ({ topicTitle, forums }) => {
                     <MdArrowDropDown className={`${openList ? 'hidden' : ''}`} size={35} />
                     <MdArrowDropUp className={`${openList ? '' : 'hidden'}`} size={35} />
                 </div>
-                {
+                {!isFetching &&
                 forums.map((forum) => 
                     <> 
-                        <Link href={`/forums/${forum.id}`}>
+                        <Link href={`/forums/${forum._id}`}>
                             <a>
-                                <ForumList key={forum.id} openList={openList} forumTitle={forum.attributes.title} threadCount={forum.attributes.threads.data.length}  />        
+                                <ForumList key={forum._id} openList={openList} forumTitle={forum.title}  />        
                             </a>
                         </Link>
                     </>
@@ -31,4 +47,4 @@ const Topic = ({ topicTitle, forums }) => {
     )
 }
 
-export default Topic
+export default Topic;
