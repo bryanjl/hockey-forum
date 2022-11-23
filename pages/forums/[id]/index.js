@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link';
 import ThreadCard from '../../../src/Thread/ThreadCard'
 import CreateThread from '../../../src/Thread/CreateThread';
@@ -6,12 +6,29 @@ import CreateThread from '../../../src/Thread/CreateThread';
 
 const Forum = (props) => {
   
-  const [threads, setThreads] = useState(props.data.data.attributes.threads.data);
+  const [threads, setThreads] = useState([]);
+  const [forum, setForum] = useState(props.data.data);
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    setIsFetching(true)
+    fetch(`http://localhost:5000/api/v1/forum/threads?forum=${props.data.data._id}`)
+        .then((res) => res.json())
+        .then((data) => {
+            if(data.success === false){
+                setThreads([]);
+            }else {
+                setThreads(data.data);
+            }
+            setIsFetching(false)                
+        });
+  }, [props.data.data._id]);
   
   return (
     <>
       <div className="p-2">
-        <h1 className="m-auto mt-5 mb-5 text-2xl">{props.data.data.attributes.title}</h1>
+        <h1 className="m-auto mt-5 mb-5 text-2xl">{forum.title}</h1>
+        <h1 className="m-auto mt-5 mb-5 text-lg">{forum.description}</h1>
         <h5 className='pl-4'>Threads</h5>
       </div>
 
@@ -20,14 +37,14 @@ const Forum = (props) => {
         {
           threads.map(thread =>
             <>
-              <Link href={`/threads/${thread.id}`}>
+              <Link href={`/threads/${thread._id}`}>
                 <a>
                   <ThreadCard 
-                    id={thread.id} 
-                    threadTitle={thread.attributes.title} 
-                    threadDescription={thread.attributes.description} 
-                    postCount={thread.attributes.posts.data.length} 
-                    creator={thread.attributes.creator} 
+                    id={thread._id} 
+                    threadTitle={thread.title} 
+                    threadDescription={thread.description} 
+                    // postCount={thread.attributes.posts.data.length} 
+                    creator={thread.createdBy} 
                   />
                 </a>
               </Link>
@@ -36,7 +53,7 @@ const Forum = (props) => {
         }
       </div>
       {/* BUTTON TO OPEN?? */}
-      <CreateThread threads={threads} setThreads={setThreads} forumID={props.data.data.id} />
+      <CreateThread threads={threads} setThreads={setThreads} forumID={props.data.data._id} />
     </>
   )
 }

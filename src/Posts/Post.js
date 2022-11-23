@@ -1,14 +1,14 @@
 import React from 'react'
 
 const Post = ({data, setReplyValue}) => {    
-    let date = data.attributes.createdAt.split('T')[0];
+    let date = data.createdAt.split('T')[0];
     
     const handleClick = () => {
         //let reply = data.attributes.body
         //setReplyValue(reply)
 
 
-        let replyValue = `${data.attributes.creator} says: ${data.attributes.body}`
+        let replyValue = `${data.createdBy} says: ${data.body}`
         setReplyValue(replyValue)
     }
 
@@ -21,14 +21,14 @@ const Post = ({data, setReplyValue}) => {
         {/* POST BODY */}
         <div className='row-span-2 flex'>
             {/* <p className='p-2 break-all'>{data.attributes.body}</p> */}
-            <div className='p-2 break-all' dangerouslySetInnerHTML={{__html: data.attributes.body}} />
+            <div className='p-2 break-all' dangerouslySetInnerHTML={{__html: data.body}} />
         </div>
         <div className='row-span-1 border-t-2 grid grid-cols-4'>
             <div className='col-span-1 border-r-2'>
                 {/* image */}
             </div>
             <div className='col-span-3 grid grid-rows-2'>
-                <div className='row-span-1 ml-2 italic'>{data.attributes.creator}</div>
+                <div className='row-span-1 ml-2 italic'>{data.createdBy}</div>
                 <div className='row-span-1 ml-2'>{date}</div>
             </div>
         </div>
