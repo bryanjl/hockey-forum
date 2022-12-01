@@ -23,38 +23,24 @@ export default function HTMLEditor({ posts, setPosts, replyValue, threadID }) {
         date = date.toISOString()
         
         let newPost = {
-            id: posts.length + 1,
-            attributes: {
                 title: '',
                 body: value,
-                createdAt: date,
-                creator: user
-            }
+                createdBy: user.username,
+                thread: threadID
         };
         
         let newData = [...posts];
-        newData.push(newPost);
-        setPosts(newData);
 
-        //thread id needs to be dynamic!!
-        newPost = {
-            data: {
-                title: '',
-                body: value,
-                thread: threadID,
-                creator: user
-            }
-        };
-
-        fetch(`http://localhost:1337/api/posts/`,{
+        fetch(`http://localhost:5000/api/v1/forum/posts`,{
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json', 
-                'authorization': `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(newPost)
-        }).then((res) => {
-            //console.log(res)
+        }).then((res) => res.json())
+        .then((data) => {
+            newData.push(data.data);
+            setPosts(newData);
         });
         
         setValue('');

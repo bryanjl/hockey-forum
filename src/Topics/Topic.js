@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
+import { UserContext } from '../context/UserContext';
 import Link from 'next/link';
 import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md'
 import ForumList from './ForumList';
 
 const Topic = ({ topicTitle, topicID }) => {
+    const {user} = useContext(UserContext);
     const [openList, setOpenList] = useState(false);
     const [isFetching, setIsFetching] = useState(true);
     const [forums, setForums] = useState([]);
+    const [titleValue, setTitleValue] = useState('');
+    const [descriptionValue, setDescriptionValue] = useState('');
+
+    // console.log(user)
 
     useEffect(() => {
         setIsFetching(true)
@@ -34,14 +40,62 @@ const Topic = ({ topicTitle, topicID }) => {
                 </div>
                 {!isFetching &&
                 forums.map((forum) => 
-                    <> 
+                    <>
                         <Link href={`/forums/${forum._id}`}>
                             <a>
-                                <ForumList key={forum._id} openList={openList} forumTitle={forum.title}  />        
+                                <ForumList key={forum._id} openList={openList} forumTitle={forum.title} />
                             </a>
                         </Link>
                     </>
-                )}  
+                )}
+                {user.role === 'admin' &&
+                    <Link href="#">
+                    <a>
+                        <div className={`${openList ? 'block' : 'hidden'}`}>
+                            <div className='w-full border-t-2 p-2 pl-4 bg-slate-50 cursor-pointer'>
+                                <h1 className='font-medium text-center'>Create New Forum</h1>
+                                <form className='bg-white rounded'>
+                                    {/* TITLE INPUT */}
+                                    <div>
+                                        <label
+                                            className='block text-gray-700 text-sm font-bold mb-2'
+                                            htmlFor='forumTitle'
+                                        >
+                                            Title:
+                                        </label>
+                                        <input
+                                            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                                            id='forumTitle'
+                                            type='text'
+                                            value={titleValue}
+                                            placeholder='Enter a title...'
+                                            onChange={(e) => setTitleValue(e.target.value)}
+                                        />
+                                    </div>
+                                    {/* DESCRIPTION INPUT */}
+                                    <div className='mt-2'>
+                                        <label
+                                            className='block text-gray-700 text-sm font-bold mb-2'
+                                            htmlFor='threadDescription'>
+                                            Description:
+                                        </label>
+                                        <textarea
+                                            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-20'
+                                            id='threadDescription'
+                                            type='text'
+                                            value={descriptionValue}
+                                            placeholder='Enter a description...'
+                                            onChange={(e) => setDescriptionValue(e.target.value)}
+                                        />
+                                    </div>
+                                    {/* NAVIGATE TO UPON CREATION */}
+                                </form>
+                            </div>
+                        </div>
+                    </a>
+                </Link>
+                }
+                
             </div>
         </>
     )

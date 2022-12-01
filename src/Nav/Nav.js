@@ -46,7 +46,7 @@ const Nav = ({ openNav, setOpenNav }) => {
       </Link>
 
       {!user &&
-        <div onClick={handleClick} className='w-full h-20 grid grid-cols-4 border-b-2 border-b-slate-400 shadow-md'>
+        <div onClick={handleClick} className='w-full h-20 grid grid-cols-4 border-b-2 border-b-slate-400 shadow-md cursor-pointer'>
           <div className='col-span-1 flex border-r-2 border-r-slate-250'>
             <MdLogin className='m-auto' size={40} />
           </div>
@@ -77,7 +77,7 @@ const Nav = ({ openNav, setOpenNav }) => {
       }
 
       {user &&
-        <Tab text={user} italic='italic'>
+        <Tab text={user.username} italic='italic'>
           <MdPerson className='m-auto' size={40} />
         </Tab>
       }
@@ -86,7 +86,7 @@ const Nav = ({ openNav, setOpenNav }) => {
         <MdMessage className='m-auto' size={30} />
       </Tab> */}
       {user &&
-      <div onClick={handleLogout}>
+      <div className='cursor-pointer' onClick={handleLogout}>
         <Tab text='Logout' italic='italic'>
           <MdLogout className='m-auto' size={40} />
         </Tab>

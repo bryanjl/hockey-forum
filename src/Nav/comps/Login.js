@@ -22,9 +22,14 @@ const Login = ({setOpenLogin, setOpenRegister}) => {
             return response.json();
         }).then(data => {
             if(data.success){
+                console.log(data);
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('username', data.user.username)
-                setUser(data.user.username);
+                localStorage.setItem('username', data.user.username);
+                localStorage.setItem('role', data.user.role);
+                setUser({
+                    username: data.user.username,
+                    role: data.user.role
+                });
                 setOpenRegister(false);
                 setOpenLogin(false);
                 // console.log(data.user)

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Topic from '../src/Topics/Topic';
 
 export default function Home(props) {
-  console.log(props)
+  // console.log(props)
   return (
     <>
 

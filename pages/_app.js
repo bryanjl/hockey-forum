@@ -8,7 +8,12 @@ function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    let storedUser = localStorage.getItem('username');
+    let storedUsername = localStorage.getItem('username');
+    let userRole = localStorage.getItem('role');
+    let storedUser = {
+      username: storedUsername,
+      role: userRole
+    }
     // console.log(storedUser)
     setUser(storedUser)
     

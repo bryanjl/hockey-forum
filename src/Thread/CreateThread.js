@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext';
 
 const CreateThread = ({threads, setThreads, forumID}) => {
-    const {user} = useContext(UserContext)
+    const {user} = useContext(UserContext);
 
     const [titleValue, setTitleValue]= useState('');
     const [descriptionValue, setDescriptionValue] = useState('');
@@ -10,39 +10,24 @@ const CreateThread = ({threads, setThreads, forumID}) => {
     const handleCreateThread = () => {
         //create data body
         let newThread = {
-            data: {
-                title: titleValue,
-                description: descriptionValue,
-                forum: forumID,
-                creator: user
-            }
+            title: titleValue,
+            description: descriptionValue,
+            forum: forumID,
+            createdBy: user.username
         }
 
-        //NEED TO ADD USER INFO and DATE
         let newThreads = [...threads];
-        newThreads.push({
-            id: threads.length + 1,
-            attributes: {
-                title: titleValue,
-                description: descriptionValue,
-                creator: user,
-                posts: {
-                    data: []
-                }
-            }
-        });
 
-        setThreads(newThreads);
-
-        fetch(`http://localhost:1337/api/threads/`,{
+        fetch(`http://localhost:5000/api/v1/forum/threads`,{
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json', 
-                'authorization': `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(newThread)
-        }).then((res) => {
-            // console.log(res)
+        }).then((res) => res.json())
+        .then((data) => {
+            newThreads.push(data.data);
+            setThreads(newThreads);
         });
 
         //clear the value
