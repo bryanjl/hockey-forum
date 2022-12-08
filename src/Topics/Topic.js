@@ -48,7 +48,7 @@ const Topic = ({ topicTitle, topicID }) => {
                         </Link>
                     </>
                 )}
-                {user.role === 'admin' &&
+                {user !== null && user.role === 'admin' &&
                     <Link href="#">
                     <a>
                         <div className={`${openList ? 'block' : 'hidden'}`}>
