@@ -62,7 +62,7 @@ const Thread = (props) => {
 }
 
 export async function getServerSideProps(context){
-  const res = await fetch(`http://localhost:5000/api/v1/forum/threads/${context.params.id}`)
+  const res = await fetch(`https://hockey-chronicles-api.herokuapp.com/api/v1/forum/threads/${context.params.id}`)
   const data = await res.json();
   //console.log(data.data.attributes.threads.data[0].title)
   // CAN REDUCE SIZE OF OBJECT
