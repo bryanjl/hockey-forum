@@ -27,7 +27,7 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context){
-  const res = await fetch('http://localhost:5000/api/v1/forum/topics');
+  const res = await fetch('https://hockey-chronicles-api.herokuapp.com/api/v1/forum/topics');
   const data = await res.json();
 
   //console.log(data);

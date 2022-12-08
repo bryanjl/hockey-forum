@@ -18,7 +18,7 @@ const Thread = (props) => {
   
   useEffect(() => {
     setIsFetching(true)
-    fetch(`http://localhost:5000/api/v1/forum/posts?thread=${props.data.data._id}`)
+    fetch(`https://hockey-chronicles-api.herokuapp.com/api/v1/forum/posts?thread=${props.data.data._id}`)
         .then((res) => res.json())
         .then((data) => {
             if(data.success === false){

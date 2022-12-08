@@ -18,7 +18,7 @@ const CreateThread = ({threads, setThreads, forumID}) => {
 
         let newThreads = [...threads];
 
-        fetch(`http://localhost:5000/api/v1/forum/threads`,{
+        fetch(`https://hockey-chronicles-api.herokuapp.com/api/v1/forum/threads`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

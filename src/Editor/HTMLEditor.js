@@ -31,7 +31,7 @@ export default function HTMLEditor({ posts, setPosts, replyValue, threadID }) {
         
         let newData = [...posts];
 
-        fetch(`http://localhost:5000/api/v1/forum/posts`,{
+        fetch(`https://hockey-chronicles-api.herokuapp.com/api/v1/forum/posts`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

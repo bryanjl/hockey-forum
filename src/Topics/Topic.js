@@ -17,7 +17,7 @@ const Topic = ({ topicTitle, topicID }) => {
 
     useEffect(() => {
         setIsFetching(true)
-        fetch(`http://localhost:5000/api/v1/forum/forums?topic=${topicID}`)
+        fetch(`https://hockey-chronicles-api.herokuapp.com/api/v1/forum/forums?topic=${topicID}`)
             .then((res) => res.json())
             .then((data) => {
                 if(data.success === false){
