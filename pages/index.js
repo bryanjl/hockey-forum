@@ -10,7 +10,7 @@ export default function Home(props) {
 
         <div className=''>
           <div className='w-full h-20 flex'>
-            <h1 className='my-auto pl-10 text-3xl font-bold'>Forums</h1>
+            <h1 className='my-auto pl-10 text-3xl font-bold'>Topics</h1>
           </div>
           {
             props.data.data.map((topic) =>
