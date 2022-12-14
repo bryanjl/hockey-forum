@@ -29,6 +29,25 @@ const Topic = ({ topicTitle, topicID }) => {
             })
     }, [topicID]);
 
+    const handleSubmitForum = () => {
+        const bodyData = {
+            title: titleValue,
+            description: descriptionValue,
+            createdBy: user.username,
+            topic: topicID
+        }
+
+        fetch('https://hockey-chronicles-api.herokuapp.com/api/v1/forum/forums/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyData)
+        })
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    }
+
     return (
         <>
             {/* DROPDOWN */}
@@ -89,6 +108,9 @@ const Topic = ({ topicTitle, topicID }) => {
                                         />
                                     </div>
                                     {/* NAVIGATE TO UPON CREATION */}
+                                    <div className='w-full flex'>
+                                        <button onClick={handleSubmitForum} className='m-auto px-5 py-2 border border-black rounded-md bg-slate-200'>Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
